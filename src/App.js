@@ -1,48 +1,49 @@
-import React, { useState } from 'react';
-import Table from "./components/common/Table";
-import Form from './components/common/Form'
+import React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 
-// import './App.css';
+import PeoplePage from "./pages/PeoplePage"
+import StarshipsPage from "./pages/StarshipsPage"
+import PlanetsPage from "./pages/PlanetsPage"
+  
+
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const data = [
-    {first: 'Mark', last: 'Otto', handle: '@motto', id: '1'},
-    {first: 'Carl', last: 'Reno', handle: '@ceno', id: '2'},
-    {first: 'Steve', last: 'Smith', handle: '@ssteve', id: '3'}
-]
-
-const columns = Object.keys(data[0]);
-
-function App() {
-    const [people, setPeople] = useState(data);
-    console.log(people);
-
-    const handleAppPerson = (personData) => {
-        const data = [...people, personData];
-        setPeople(data)
-    }
-
-    const getInitialPeopleData = () => {
-        return columns.reduce((cols, columnName) => {
-            cols[columnName] = "";
-            return cols;
-        }, {})
-    }
-
+export default function App() {
     return (
+      <Router>
         <div className="container">
-            <Table
-                data={people}
-                columns={columns}
-                tableDescriptor="People"
-            />
-            <Form
-                initialData={getInitialPeopleData()}
-                columns={columns}
-                onAddData={handleAppPerson}
-            />
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <ul class="navbar-nav mr-auto">
+              <li className="nav-item active">
+                <Link className="nav-link" to="/">People</Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/planets">Planets</Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/starships">Starships</Link>
+              </li>
+            </ul>
+          </nav>
+  
+          <Switch>
+            <Route path="/planets">
+              <PlanetsPage />
+            </Route>
+            <Route path="/starships">
+              <StarshipsPage />
+            </Route>
+            <Route path="/">
+              <PeoplePage />
+            </Route>
+          </Switch>
         </div>
+      </Router>
     );
-}
-
-export default App;
+  }
