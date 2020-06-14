@@ -3,12 +3,14 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Redirect
   } from "react-router-dom";
 
 import PeoplePage from "./pages/PeoplePage"
 import StarshipsPage from "./pages/StarshipsPage"
 import PlanetsPage from "./pages/PlanetsPage"
+import NotFoundPage from "./pages/NotFoundPage"
   
 
 import './App.css';
@@ -33,17 +35,27 @@ export default function App() {
           </nav>
   
           <Switch>
+            <Route path="/people">
+              <PeoplePage />
+            </Route>
             <Route path="/planets">
               <PlanetsPage />
-            </Route>
+            </Route>            
             <Route path="/starships">
               <StarshipsPage />
             </Route>
-            <Route path="/">
-              <PeoplePage />
+            <Route path="/not-found">
+              <NotFoundPage />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/people" />
+            </Route>
+            <Route path="*">
+              <NotFoundPage />
             </Route>
           </Switch>
         </div>
       </Router>
     );
-  }
+}
+
