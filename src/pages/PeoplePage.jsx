@@ -25,12 +25,20 @@ export default function PeoplePage() {
       }, {})
   }
 
+  const handleDeletePerson = (event) => {
+    const id = event.currentTarget.id;
+    const data = people.filter(item => item.id !== id)
+    setPeople(data)
+  }
+
   return (
       <div className="container">
+        <div className="h1">People</div>
           <Table
               data={people}
               columns={columns}
               tableDescriptor="People"
+              onDelete={handleDeletePerson}
           />
           <Form
               initialData={getInitialPeopleData()}

@@ -19,7 +19,7 @@ export default function App() {
       <Router>
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <ul class="navbar-nav mr-auto">
+            <ul className="navbar-nav mr-auto">
               <li className="nav-item active">
                 <Link className="nav-link" to="/">People</Link>
               </li>
